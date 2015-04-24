@@ -1123,6 +1123,18 @@ public class JdbcModelReader
             }
         }
         query.append(" FROM ");
+        if (table.getCatalog() != null) {
+            if (getPlatform().isDelimitedIdentifierModeOn())
+            {
+                query.append(getPlatformInfo().getDelimiterToken());
+            }
+            query.append(table.getCatalog());
+            if (getPlatform().isDelimitedIdentifierModeOn())
+            {
+                query.append(getPlatformInfo().getDelimiterToken());
+            }
+            query.append(".");
+        }
         if (getPlatform().isDelimitedIdentifierModeOn())
         {
             query.append(getPlatformInfo().getDelimiterToken());
